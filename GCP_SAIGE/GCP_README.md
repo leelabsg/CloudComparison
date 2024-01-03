@@ -7,4 +7,4 @@ ____DESCRIBE THE PROCESS________
 2) Have to upload the start-up-script to the bucket
 3) In order for the start-up script to run successfully, all necessary SAIGE files (for steps 0,1,2) need to be in the bucket in the corresponding folders.
 
-4)  
+____UPDATING SOON____
