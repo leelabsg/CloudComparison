@@ -1,0 +1,247 @@
+#AWS 를 이용하여 object storage 에서 파일들을 가져와야 합니다.
+#AWS 를 이용하여 파일을 object storage 버킷으로 보내야 하는데, lee lab 서버 sudo user 권한이 없어서 chr 22만 로컬에 다운받고 제 로컬에서 다시 never object storage로 올리는 방식으로 했습니다.
+#먼저 naver cloud cli를 GUI에서 다운받고 cli를 서버로 올려야 합니다. 인증 키인 pem 파일도 같이 올려야 합니다.(여기서는 aaa.pem 이름으로 나와있습니다.)
+#ssh 세션이 끊기는 경우가 있었습니다. 그래서 nohup으로 돌렸습니다.
+ncloud server createServerInstances --serverImageProductCode SPSW0LINUX000130 --serverProductCode SPSVRSSD00000013 --serverName ncloud-mktest
+###################################
+아래와 같이 리턴이 됩니다. serverInstanceNo를 기억해 줍니다.
+{
+ "createServerInstancesResponse": {
+  "requestId": "2ea6a22a-5ad0-4848-acae-308c817b4789",
+  "returnCode": "0",
+  "returnMessage": "success",
+  "totalRows": 1,
+  "serverInstanceList": [
+   {
+    "serverInstanceNo": "397255", ###copy
+    "serverName": "ncloud-mktest",
+    "serverDescription": "",
+    "cpuCount": 1,
+    "memorySize": 2147483648,
+    "baseBlockStorageSize": 53687091200,
+    "platformType": {
+     "code": "LNX64",
+     "codeName": "Linux 64 Bit"
+    },
+    "loginKeyName": "ysw",
+    "isFeeChargingMonitoring": false,
+    "publicIp": "",
+    "privateIp": "10.113.245.112",
+    "serverImageName": "centos-7.3-64",
+    "serverInstanceStatus": {
+     "code": "INIT",
+     "codeName": "Server INIT State"
+    },
+    "serverInstanceOperation": {
+     "code": "NULL",
+     "codeName": "Server NULL OP"
+    },
+    "serverInstanceStatusName": "init",
+    "createDate": "2018-02-23T13:55:34+0900",
+    "uptime": "2018-02-23T13:55:34+0900",
+    "serverImageProductCode": "SPSW0LINUX000046",
+    "serverProductCode": "SPSVRSTAND000003",
+    "isProtectServerTermination": false,
+    "portForwardingPublicIp": "192.168.120.111",
+    "zone": {
+     "zoneNo": "2",
+     "zoneName": "KR-1",
+     "zoneCode": "KR-1",
+     "zoneDescription": "KR-1 zone",
+     "regionNo": "1"
+    },
+    "region": {
+     "regionNo": "1",
+     "regionCode": "KR",
+     "regionName": "Korea"
+    },
+    "baseBlockStorageDiskType": {
+     "code": "NET",
+     "codeName": "Network Storage"
+    },
+    "baseBlockStroageDiskDetailType": {
+     "code": "HDD",
+     "codeName": "HDD"
+    },
+    "serverInstanceType": {
+     "code": "STAND",
+     "codeName": "Standard"
+    },
+    "userData": "",
+    "initScriptNo": "",
+    "accessControlGroupList": []
+   }
+  ]
+ }
+}
+###################################
+ncloud server createPublicIpInstance --serverInstanceNo {serverInstanceNo} # 아까 리턴된 21720828
+ncloud server getRootPassword --serverInstanceNo 21720828 --privateKey file://aaa.pem
+{
+ "getRootPasswordResponse": {
+  "totalRows": 1,
+  "rootPassword": "A25@DRa=?ur", ###copy
+  "requestId": "61e0319b-287e-44c2-8d1c-ff3f9be1df54",
+  "returnCode": "0",
+  "returnMessage": "success"
+ }
+}
+ncloud server getPortForwardingRuleList
+#portForwardingConfigurationNo 확인
+#아래의 portForwardingConfigurationNo에 해당 값을 넣어줍니다.
+#마찬가지로 serverInstanceNo도 아까 받아왔던 값을 넣습니다.
+#portForwardingExternalPort는 Min : 1, Max : 65534
+#portForwardingInternalPort 다음 포트만 입력 가능 [리눅스: 22 | 윈도우: 3389]
+ncloud server addPortForwardingRules --portForwardingConfigurationNo 158730 --portForwardingRuleList "serverInstanceNo=21720828,portForwardingExternalPort=1032,portForwardingInternalPort=22"
+#500GB용량 스토리지를 serverInstanceNo 21720828에 붙여 줍니다.
+ncloud server createBlockStorageInstance --blockStorageSize 500 --serverInstanceNo 21720828
+###################################
+아래가 반환됩니다. blockStorageInstanceNo가 나중에 blockStorageInstance를 지우는 데 필요합니다.
+{
+ "createBlockStorageInstanceResponse": {
+  "totalRows": 1,
+  "blockStorageInstanceList": [
+   {
+    "blockStorageInstanceNo": "21743411", ###기억
+    "serverInstanceNo": "21720828",
+    "serverName": "ncloud-mktest",
+    "blockStorageType": {
+     "code": "SVRBS",
+     "codeName": "Server BS"
+    },
+    "blockStorageName": "bst18cbf674c28",
+    "blockStorageSize": 536870912000,
+    "deviceName": "",
+    "blockStorageProductCode": "SPBSTBSTAD000002",
+    "blockStorageInstanceStatus": {
+     "code": "INIT",
+     "codeName": "Block storage INIT state"
+    },
+    "blockStorageInstanceOperation": {
+     "code": "NULL",
+     "codeName": "Block Storage NULLOP"
+    },
+    "blockStorageInstanceStatusName": "initialized",
+    "createDate": "2023-12-31T19:24:29+0900",
+    "blockStorageInstanceDescription": "",
+    "diskType": {
+     "code": "NET",
+     "codeName": "Network Storage"
+    },
+    "diskDetailType": {
+     "code": "HDD",
+     "codeName": "HDD"
+    },
+    "region": {
+     "regionNo": "1",
+     "regionCode": "KR",
+     "regionName": "Korea"
+    },
+    "zone": {
+     "zoneNo": "3",
+     "zoneName": "KR-2",
+     "zoneCode": "KR-2",
+     "zoneDescription": "평촌 zone",
+     "regionNo": "1"
+    }
+   }
+  ],
+  "requestId": "d3435b48-30bb-4771-8655-b8f536f6bdaf",
+  "returnCode": "0",
+  "returnMessage": "success"
+ }
+}
+###################################
+#새로 생긴 인스턴스에 naver cloud cli를 cp
+scp -P 1032 -r ../cli_linux root@27.96.129.251:/
+#새로 생긴 인스턴스에 ssh로 들어갑니다.
+ssh -p 1032 root@27.96.129.251
+#스토리지를 마운트 합니다.
+#https://brunch.co.kr/@topasvga/3466
+#https://guide-gov.ncloud-docs.com/docs/compute-compute-4-1-v2
+fdisk /dev/xvdb. #n p enter enter w
+mkfs.ext4 /dev/xvdb1
+mkdir /mnt/a
+mount /dev/xvdb1 /mnt/a
+(Optional)
+{
+vi /etc/fstab
+에 들어가서
+/dev/xvdb1   /mnt/a   ext4    defaults    1    2
+를 마지막줄에 더해주기
+}
+mkdir -p /mnt/a/data1/SAIGE/SAIGE_Step1/
+mkdir -p /mnt/a/data1/SAIGE/SAIGE_Step2/output
+apt install python-pip
+pip install awscli==1.15.85
+aws configure
+#access key와 secret키가 필요합니다. 네이버 클라우드 플랫폼 마이페이지>계정관리>인증키관리에서 확인합니다.
+#JcWpzzSYISiipUCMlqsH
+#k6FfwQ4gRxkGQQ9xvWUQX559E4X0xY00gd2VmF2h
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-object --bucket leelabsgtest --key UKB_step1.fam /mnt/a/data1/SAIGE/SAIGE_Step1/UKB_step1.fam
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-object --bucket leelabsgtest --key UKB_step1.bed /mnt/a/data1/SAIGE/SAIGE_Step1/UKB_step1.bed
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-object --bucket leelabsgtest --key UKB_step1.bim /mnt/a/data1/SAIGE/SAIGE_Step1/UKB_step1.bim
+cd /root
+sudo apt-get update
+sudo apt-get install docker.io #yes 선택
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+docker pull wzhou88/saige:1.3.0
+cd /mnt/a/data1/SAIGE/SAIGE_Step1
+nohup docker run -w /mnt/a/data1/SAIGE/SAIGE_Step1 -v /mnt/a/data1/SAIGE/SAIGE_Step1/:/mnt/a/data1/SAIGE/SAIGE_Step1/ wzhou88/saige:1.3.0 createSparseGRM.R --plinkFile=/mnt/a/data1/SAIGE/SAIGE_Step1/UKB_step1    --nThreads=4  --outputPrefix=/mnt/a/data1/SAIGE/SAIGE_Step1/sparseGRM --numRandomMarkerforSparseKin=2000 --relatednessCutoff=0.125 > /mnt/a/data1/SAIGE/SAIGE_Step1/nohup1.out &
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-object --bucket leelabsgtest --key HDL_imputed_pheno.txt /mnt/a/data1/SAIGE/SAIGE_Step1/HDL_imputed_pheno.txt
+mkdir /mnt/a/data1/SAIGE/SAIGE_Step1/output
+nohup docker run -w /mnt/a/data1/SAIGE/SAIGE_Step1 -v /mnt/a/data1/SAIGE/SAIGE_Step1/:/mnt/a/data1/SAIGE/SAIGE_Step1/ wzhou88/saige:1.3.0 step1_fitNULLGLMM.R \
+--useSparseGRMtoFitNULL=TRUE \
+--sparseGRMFile=/mnt/a/data1/SAIGE/SAIGE_Step1/sparseGRM_relatednessCutoff_0.125_2000_randomMarkersUsed.sparseGRM.mtx \
+--sparseGRMSampleIDFile=/mnt/a/data1/SAIGE/SAIGE_Step1/sparseGRM_relatednessCutoff_0.125_2000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt \
+--plinkFile=/mnt/a/data1/SAIGE/SAIGE_Step1/UKB_step1 \
+--phenoFile=/mnt/a/data1/SAIGE/SAIGE_Step1/HDL_imputed_pheno.txt \
+--phenoCol=HDL \
+--covarColList=Sex,Age,PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10 \
+--sampleIDColinphenoFile=eid \
+--traitType=quantitative \
+--invNormalize=TRUE \
+--outputPrefix=./output/HDL_imputed_Step1 \
+--nThreads=4 \
+--LOCO=TRUE \
+--FemaleCode=2 \
+--MaleCode=1 \
+--IsOverwriteVarianceRatioFile=TRUE > /mnt/a/data1/SAIGE/SAIGE_Step1/nohup2.out &
+cd /mnt/a/data1/SAIGE/SAIGE_Step2
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-object --bucket leelabsgtest --key ukb45227_imp_chr1_v3_s487296.sample /mnt/a/data1/SAIGE/SAIGE_Step2/ukb45227_imp_chr1_v3_s487296.sample
+for ((chr=1; chr<=22; chr++))
+do
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-object --bucket leelabsgtest --key ukb_imp_chr${chr}_v3.bgen.bgi /mnt/a/data1/SAIGE/SAIGE_Step2/ukb_imp_chr${chr}_v3.bgen.bgi
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3api get-object --bucket leelabsgtest --key ukb_imp_chr${chr}_v3.bgen /mnt/a/data1/SAIGE/SAIGE_Step2/ukb_imp_chr${chr}_v3.bgen
+docker run -w /mnt/a/data1/SAIGE/ -v /mnt/a/data1/SAIGE/:/mnt/a/data1/SAIGE/ wzhou88/saige:1.3.0 step2_SPAtests.R  \
+--bgenFile=/mnt/a/data1/SAIGE/SAIGE_Step2/ukb_imp_chr${chr}_v3.bgen \
+--bgenFileIndex=/mnt/a/data1/SAIGE/SAIGE_Step2/ukb_imp_chr${chr}_v3.bgen.bgi    \
+--minMAF=0.0001 \
+--minMAC=10   \
+"--chrom="$(printf "%02d" $chr) \
+--GMMATmodelFile=/mnt/a/data1/SAIGE/SAIGE_Step1/output/HDL_imputed_Step1.rda    \
+--sampleFile=/mnt/a/data1/SAIGE/SAIGE_Step2/ukb45227_imp_chr1_v3_s487296.sample   \
+--varianceRatioFile=/mnt/a/data1/SAIGE/SAIGE_Step1/output/HDL_imputed_Step1.varianceRatio.txt    \
+--SAIGEOutputFile=/mnt/a/data1/SAIGE/SAIGE_Step2/output/chr${chr}_HDL_imputed_output    \
+--LOCO=FALSE
+ aws --endpoint-url=https://kr.object.ncloudstorage.com s3api put-object --bucket leelabsgtest --key chr${chr}_HDL_imputed_output --body /mnt/a/data1/SAIGE/SAIGE_Step2/output/chr${chr}_HDL_imputed_output
+ aws --endpoint-url=https://kr.object.ncloudstorage.com s3api put-object --bucket leelabsgtest --key chr${chr}_HDL_imputed_output.index --body /mnt/a/data1/SAIGE/SAIGE_Step2/output/chr${chr}_HDL_imputed_output.index
+rm /mnt/a/data1/SAIGE/SAIGE_Step2/ukb_imp_chr${chr}_v3.bgen
+rm /mnt/a/data1/SAIGE/SAIGE_Step2/ukb_imp_chr${chr}_v3.bgen.bgi
+done
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3api put-object --bucket leelabsgtest --key sparseGRM_relatednessCutoff_0.125_2000_randomMarkersUsed.sparseGRM.mtx --body /mnt/a/data1/SAIGE/SAIGE_Step1/sparseGRM_relatednessCutoff_0.125_2000_randomMarkersUsed.sparseGRM.mtx
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3api put-object --bucket leelabsgtest --key sparseGRM_relatednessCutoff_0.125_2000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt --body /mnt/a/data1/SAIGE/SAIGE_Step1/sparseGRM_relatednessCutoff_0.125_2000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt
+aws --endpoint-url=https://kr.object.ncloudstorage.com s3api put-object --bucket leelabsgtest --key output --body /mnt/a/data1/SAIGE/SAIGE_Step2/output
+umount /mnt/a
+cd /root
+./ncloud configure
+#JcWpzzSYISiipUCMlqsH
+#k6FfwQ4gRxkGQQ9xvWUQX559E4X0xY00gd2VmF2h
+ncloud server deleteBlockStorageInstances --blockStorageInstanceNoList 21743411
+exit
+cd /cli_linux
+ncloud server stopServerInstances --serverInstanceNoList 21720828
+#1분정도 기다려야 함
+ncloud server terminateServerInstances --serverInstanceNoList 21720828
