@@ -36,13 +36,13 @@ docker run -w /mnt/disks/data1/SAIGE/SAIGE_Step1 -v /mnt/disks/data1/SAIGE/SAIGE
         --sparseGRMFile=/mnt/disks/data1/SAIGE/SAIGE_Step1/sparseGRM_relatednessCutoff_0.125_2000_randomMarkersUsed.sparseGRM.mtx       \
         --sparseGRMSampleIDFile=/mnt/disks/data1/SAIGE/SAIGE_Step1/sparseGRM_relatednessCutoff_0.125_2000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt \
         --plinkFile=/mnt/disks/data1/SAIGE/SAIGE_Step1/UKB_step1        \
-        --phenoFile=/mnt/disks/data1/SAIGE/SAIGE_Step1/HDL_imputed_pheno.txt    \
+        --phenoFile=/mnt/disks/data1/SAIGE/SAIGE_Step1/{pheno_file}.txt    \
         --phenoCol=HDL     \
         --covarColList=Sex,Age,PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10   \
         --sampleIDColinphenoFile=eid     \
         --traitType=quantitative        \
         --invNormalize=TRUE     \
-        --outputPrefix=./output/HDL_imputed_Step1        \
+        --outputPrefix=./output/{pheno_file}_Step1        \
         --nThreads=4    \
         --LOCO=TRUE     \
         --FemaleCode=2  \
@@ -64,12 +64,12 @@ do
                 "--chrom="$(print "%02d" $chr)  \
                 --GMMATmodelFile=/mnt/disks/data1/SAIGE/SAIGE_Step1/output/HDL_imputed_Step1.rda        \
                 --sampleFile=/mnt/disks/data1/SAIGE/SAIGE_Step2/ukb45227_imp_chr1_v3_s487296.sample     \
-                --varianceRatioFile=/mnt/disks/data1/SAIGE/SAIGE_Step1/output/HDL_imputed_Step1.varianceRatio.txt       \
-                --SAIGEOutputFile=/mnt/disks/data1/SAIGE/SAIGE_Step2/output/chr${chr}_HDL_imputed_output        \
+                --varianceRatioFile=/mnt/disks/data1/SAIGE/SAIGE_Step1/output/{pheno_file}_Step1.varianceRatio.txt       \
+                --SAIGEOutputFile=/mnt/disks/data1/SAIGE/SAIGE_Step2/output/chr${chr}_{pheno_file}_output        \
                 --LOCO=FALSE
 
-    gsutil cp /mnt/disks/data1/SAIGE/SAIGE_Step2/output/chr${chr}_HDL_imputed_output gs://leelabsg-cloud-test/UKBB/SAIGE_output/
-        gsutil cp /mnt/disks/data1/SAIGE/SAIGE_Step2/output/chr${chr}_HDL_imputed_output.index gs://leelabsg-cloud-test/UKBB/SAIGE_output/
+    gsutil cp /mnt/disks/data1/SAIGE/SAIGE_Step2/output/chr${chr}_{pheno_file}_output gs://leelabsg-cloud-test/UKBB/SAIGE_output/
+        gsutil cp /mnt/disks/data1/SAIGE/SAIGE_Step2/output/chr${chr}_{pheno_file}_output.index gs://leelabsg-cloud-test/UKBB/SAIGE_output/
 
         sudo rm /mnt/disks/data1/SAIGE/SAIGE_Step2/ukb_imp_chr${chr}_v3.bgen
         sudo rm /mnt/disks/data1/SAIGE/SAIGE_Step2/ukb_imp_chr${chr}_v3.bgen.bgi &
