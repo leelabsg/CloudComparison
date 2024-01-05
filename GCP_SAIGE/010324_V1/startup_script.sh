@@ -62,7 +62,7 @@ do
                 --minMAF=0.0001 \
                 --minMAC=10     \
                 "--chrom="$(print "%02d" $chr)  \
-                --GMMATmodelFile=/mnt/disks/data1/SAIGE/SAIGE_Step1/output/HDL_imputed_Step1.rda        \
+                --GMMATmodelFile=/mnt/disks/data1/SAIGE/SAIGE_Step1/output/{pheno_file}_Step1.rda        \
                 --sampleFile=/mnt/disks/data1/SAIGE/SAIGE_Step2/ukb45227_imp_chr1_v3_s487296.sample     \
                 --varianceRatioFile=/mnt/disks/data1/SAIGE/SAIGE_Step1/output/{pheno_file}_Step1.varianceRatio.txt       \
                 --SAIGEOutputFile=/mnt/disks/data1/SAIGE/SAIGE_Step2/output/chr${chr}_{pheno_file}_output        \
