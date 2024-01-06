@@ -1,3 +1,4 @@
+#ssh -p 1028 root@27.96.129.251를 이용하여 leelab server에 접속 (password = flfoq [리랩])
 #AWS 를 이용하여 object storage 에서 파일들을 가져와야 합니다.
 #AWS 를 이용하여 파일을 object storage 버킷으로 보내야 하는데, lee lab 서버 sudo user 권한이 없어서 chr 22만 로컬에 다운받고 제 로컬에서 다시 never object storage로 올리는 방식으로 했습니다.
 #먼저 naver cloud cli를 GUI에서 다운받고 cli를 서버로 올려야 합니다. 인증 키인 pem 파일도 같이 올려야 합니다.(여기서는 aaa.pem 이름으로 나와있습니다.)
