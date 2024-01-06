@@ -161,7 +161,7 @@ ssh -p 1032 root@27.96.129.251
 #스토리지를 마운트 합니다.
 #https://brunch.co.kr/@topasvga/3466
 #https://guide-gov.ncloud-docs.com/docs/compute-compute-4-1-v2
-fdisk /dev/xvdb. #n p enter enter w
+fdisk /dev/xvdb  #n p enter enter w
 mkfs.ext4 /dev/xvdb1
 mkdir /mnt/a
 mount /dev/xvdb1 /mnt/a
