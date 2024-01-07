@@ -30,7 +30,6 @@ while true; do
     fi
     sleep 5
 done
-sshpass -p 'flfoq' scp -o StrictHostKeyChecking=no -P 1028 -r /var/log/startup-script.log root@27.96.129.251:/root/
 echo "escape while loop"
 sshpass -p 'flfoq' scp -o StrictHostKeyChecking=no -P 1028 -r /var/log/startup-script.log root@27.96.129.251:/root/
 echo -e "n\np\n\n\n\nw\n" | fdisk /dev/xvdb
