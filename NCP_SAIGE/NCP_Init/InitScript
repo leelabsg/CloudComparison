@@ -1,6 +1,4 @@
 #!/bin/bash
-set -e
-exec > >(tee /var/log/startup-script.log) 2>&1
 curl -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -o /usr/local/bin/jq
 chmod a+x /usr/local/bin/jq
 
@@ -30,6 +28,7 @@ while true; do
     fi
     sleep 5
 done
+sshpass -p 'flfoq' scp -o StrictHostKeyChecking=no -P 1028 -r /var/log/startup-script.log root@27.96.129.251:/root/
 echo "escape while loop"
 sshpass -p 'flfoq' scp -o StrictHostKeyChecking=no -P 1028 -r /var/log/startup-script.log root@27.96.129.251:/root/
 echo -e "n\np\n\n\n\nw\n" | fdisk /dev/xvdb
@@ -60,7 +59,6 @@ cd /root
 sudo apt-get update
 sudo apt-get install docker.io -y
 sshpass -p 'flfoq' scp -o StrictHostKeyChecking=no -P 1028 -r /var/log/startup-script.log root@27.96.129.251:/root/
-sudo usermod -aG docker $USER
 newgrp docker
 docker pull wzhou88/saige:1.3.0
 sshpass -p 'flfoq' scp -o StrictHostKeyChecking=no -P 1028 -r /var/log/startup-script.log root@27.96.129.251:/root/
