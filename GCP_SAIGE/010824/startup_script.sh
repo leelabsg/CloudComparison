@@ -7,7 +7,7 @@ sudo mkfs.ext4 -m 0 -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/sdb
 sudo mkdir -p /mnt/disks/data1/
 sudo mount /dev/sdb /mnt/disks/data1/
 
-sudo mkdir -p /mnt/disks/data1/SAIGE/SAIGE_Step1/
+sudo mkdir -p /mnt/disks/data1/SAIGE/SAIGE_Step1/output
 sudo mkdir -p /mnt/disks/data1/SAIGE/SAIGE_Step2/output
 
 gsutil cp gs://leelabsg-cloud-test/UKBB/SAIGE_Step1/UKB_step1.bim /mnt/disks/data1/SAIGE/SAIGE_Step1/
@@ -41,7 +41,7 @@ docker run -w /mnt/disks/data1/SAIGE/SAIGE_Step1 -v /mnt/disks/data1/SAIGE/SAIGE
         --sampleIDColinphenoFile=eid     \
         --traitType=quantitative        \
         --invNormalize=TRUE     \
-        --outputPrefix=./output/{pheno_file}_Step1        \
+        --outputPrefix=/mnt/disks/data1/SAIGE/SAIGE_Step1/output/{pheno_file}_Step1        \
         --nThreads=4    \
         --LOCO=TRUE     \
         --FemaleCode=2  \
