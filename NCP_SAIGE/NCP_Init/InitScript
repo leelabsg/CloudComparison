@@ -122,4 +122,4 @@ rm /mnt/a/data1/SAIGE/SAIGE_Step2/ukb_imp_chr${chr}_v3.bgen
 rm /mnt/a/data1/SAIGE/SAIGE_Step2/ukb_imp_chr${chr}_v3.bgen.bgi
 done
 
-umount /mnt/a
+umount -l /mnt/a
