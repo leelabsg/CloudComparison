@@ -66,15 +66,15 @@ do
                 --varianceRatioFile=/mnt/disks/data1/SAIGE/SAIGE_Step1/output/{pheno_file}_Step1.varianceRatio.txt       \
                 --SAIGEOutputFile=/mnt/disks/data1/SAIGE/SAIGE_Step2/output/chr${chr}_{pheno_file}_output        \
                 --LOCO=FALSE
+
+        sudo rm /mnt/disks/data1/SAIGE/SAIGE_Step2/ukb_imp_chr${chr}_v3.bgen
+        sudo rm /mnt/disks/data1/SAIGE/SAIGE_Step2/ukb_imp_chr${chr}_v3.bgen.bgi
 done
 
 for ((chr=1; chr<=22; chr++))
 do
         gsutil cp /mnt/disks/data1/SAIGE/SAIGE_Step2/output/chr${chr}_{pheno_file}_output gs://leelabsg-cloud-test/UKBB/SAIGE_output/
         gsutil cp /mnt/disks/data1/SAIGE/SAIGE_Step2/output/chr${chr}_{pheno_file}_output.index gs://leelabsg-cloud-test/UKBB/SAIGE_output/
-
-        sudo rm /mnt/disks/data1/SAIGE/SAIGE_Step2/ukb_imp_chr${chr}_v3.bgen
-        sudo rm /mnt/disks/data1/SAIGE/SAIGE_Step2/ukb_imp_chr${chr}_v3.bgen.bgi &
 done
 
 gsutil cp -r /mnt/disks/data1/SAIGE/SAIGE_Step2/output gs://leelabsg-cloud-test/UKBB/SAIGE_output/
