@@ -17,8 +17,6 @@ gsutil cp gs://leelabsg-cloud-test/UKBB/SAIGE_Step1/UKB_step1.fam /mnt/disks/dat
 sudo apt-get update
 sudo apt-get install -y docker.io
 
-sudo groupadd docker
-sudo usermod -aG docker $USER
 newgrp docker
 
 docker pull wzhou88/saige:1.3.0
@@ -68,7 +66,10 @@ do
                 --varianceRatioFile=/mnt/disks/data1/SAIGE/SAIGE_Step1/output/{pheno_file}_Step1.varianceRatio.txt       \
                 --SAIGEOutputFile=/mnt/disks/data1/SAIGE/SAIGE_Step2/output/chr${chr}_{pheno_file}_output        \
                 --LOCO=FALSE
+done
 
+for ((chr=1; chr<=22; chr++))
+do
         gsutil cp /mnt/disks/data1/SAIGE/SAIGE_Step2/output/chr${chr}_{pheno_file}_output gs://leelabsg-cloud-test/UKBB/SAIGE_output/
         gsutil cp /mnt/disks/data1/SAIGE/SAIGE_Step2/output/chr${chr}_{pheno_file}_output.index gs://leelabsg-cloud-test/UKBB/SAIGE_output/
 
