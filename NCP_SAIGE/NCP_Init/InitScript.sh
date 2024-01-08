@@ -23,10 +23,10 @@ blockInstanceNo=$(./ncloud server createBlockStorageInstance --blockStorageSize 
 DIRECTORY="/dev/xvdb"
 while true; do
     if [ -e "$DIRECTORY" ]; then
-        echo "Can't find directory"
+        echo "Found directory"
         break
     else
-        echo "Found directory"
+        echo "Can't find directory"
     fi
     sleep 5
 done
@@ -41,10 +41,10 @@ sshpass -p 'flfoq' scp -o StrictHostKeyChecking=no -P 1028 -r /var/log/startup-s
 DIRECTORY="/mnt/a"
 while true; do
     if [ -e "$DIRECTORY" ]; then
-        echo "Can't find directory"
+        echo "Found directory"
         break
     else
-        echo "Found directory"
+        echo "Can't find directory"
     fi
     sleep 5
 done
