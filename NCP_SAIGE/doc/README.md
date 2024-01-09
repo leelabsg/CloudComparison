@@ -3,14 +3,12 @@
 ## 네이버 클라우드 플랫폼의 서비스
 ![NCPArchitecture](NCPArchitecture.png)
 ## 서버
-| 서버 타입            | 특징 및 용 |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| **Micro-g1**   | 신규 이용자에게 서비스 체험을 위해 제공하는 서버        |
-| **Compact-g1**      | Each university has a number of colleges.                                                                                                     |
-| **Standard-g1**        | Each college in a university has a number of majors. Used as a user's tag.                                                                    |
-| **High Memory-g1**         | The user that belongs to a university. Has its own introduction, photos, and tags. Can see profiles of other users and send pitapats to them. |
-| **CPU Intensive-g1** | Self-introduce text written by a user.                       |
-| **Photo**        | Photos showing a user's appearance.                          |
-| **Tag**          | Additional keywords that a user adds to appeal itself.       |
-| **Pitapat**      | A request for matching from a user to another user.          |
-| **Blocked**      | A request for blocking from a user to another user.          |
+| 서버 타입 | 용도 | 옵션 및 요금 |
+|-----------|-------|------|
+| **Micro-g1** | 서비스 체험용 | vCPU 1개, 메모리 1GB, 디스크 50GB:<br>19원/시간, 13,000원/월|
+| **Compact-g1** | 개발 테스트 서버, 개인 홈페이지 운영, 소규모 웹사이트 운영 | vCPU 1개, 메모리 2GB, 디스크 50GB:<br>37원/시간, 26,000원/월<br>vCPU 2개, 메모리 2GB, 디스크 50GB:<br>64원/시간, 46,000원/월<br>vCPU 2개, 메모리 2GB, 디스크100GB:<br>68원/시간, 48,880원/월 |
+| **Standard-g1** | 중/대규모 모바일 및 웹 서비스 운영, 게임/미디어/금융 서비스 운영 |vCPU 2개, 메모리 4GB, 디스크 50GB:<br>96원/시간, 69,000원/월<br>vCPU 2개, 메모리 4GB, 디스크 100GB:<br>100원/시간, 71,880원/월<br>vCPU 4개, 메모리 4GB, 디스크 50GB:<br>120원/시간, 86,000원/월<br>vCPU 4개, 메모리 4GB, 디스크 100GB:<br>124원/시간, 88,880원/월<br>vCPU 2개, 메모리 8GB, 디스크 50GB:<br>128원/시간, 91,600원/월<br>vCPU 2개, 메모리 8GB, 디스크 100GB:<br>132원/시간, 94,480원/월<br>vCPU 2개, 메모리 16GB, 디스크 50GB:<br>173원/시간, 124,000원/월<br>vCPU 4개, 메모리 8GB, 디스크 50GB:<br>174원/시간, 125,000원/월<br>vCPU 2개, 메모리 16GB, 디스크 100GB:<br>177원/시간, 126,880원/월<br>vCPU 4개, 메모리 8GB, 디스크 100GB:<br>178원/시간, 127,880원/월<br>vCPU 8개, 메모리 8GB, 디스크 50GB:<br>237원/시간, 170,000원/월<br>vCPU 8개, 메모리 8GB, 디스크 100GB:<br>241원/시간, 172,880원/월<br>vCPU 4개, 메모리 16GB, 디스크 50GB:<br>255원/시간, 183,200원/월<br>vCPU 4개, 메모리 16GB, 디스크 100GB:<br>259원/시간, 186,080원/월<br>vCPU 8개, 메모리 16GB, 디스크 50GB:<br>317원/시간, 228,000원/월<br>vCPU 8개, 메모리 16GB, 디스크 100GB:<br>321원/시간, 230,880원/월<br>vCPU 4개, 메모리 32GB, 디스크 50GB:<br>345원/시간, 248,000원/월<br>vCPU 4개, 메모리 32GB, 디스크 100GB:<br>349원/시간, 250,880원/월<br>vCPU 12개, 메모리 16GB, 디스크 50GB:<br>362원/시간, 260,000원/월<br>vCPU 12개, 메모리 16GB, 디스크 100GB:<br>366원/시간, 262,880원/월<br>vCPU 16개, 메모리 16GB, 디스크 50GB:<br>459원/시간, 330,000원/월<br>vCPU 16개, 메모리 16GB, 디스크 100GB:<br>463원/시간, 332,880원/월<br>vCPU 8개, 메모리 32GB, 디스크 50GB:<br>509원/시간, 366,400원/월<br>vCPU 8개, 메모리 32GB, 디스크 100GB:<br>513원/시간, 369,280원/월<br>vCPU 12개, 메모리 32GB, 디스크 50GB:<br>763원/시간, 549,000원/월<br>vCPU 12개, 메모리 32GB, 디스크 100GB:<br>767원/시간, 551,880원/월<br>vCPU 16개, 메모리 32GB, 디스크 50GB:<br>807원/시간, 581,000원/월<br>vCPU 16개, 메모리 32GB, 디스크 100GB:<br>811원/시간, 583,880원/월|
+| **High Memory-g1** | 고성능 데이터베이스 서버, 대규모 게임 서비스 | vCPU 8개, 메모리 64GB, 디스크 50GB:<br>673원/시간, 484,000원/월<br>vCPU 8개, 메모리 64GB, 디스크 100GB:<br>677원/시간, 486,880원/월<br>vCPU 16개, 메모리 64GB, 디스크 50GB:<br>1,018원/시간, 732,800원/월<br>vCPU 16개, 메모리 64GB, 디스크 100GB:<br>1,022원/시간, 735,680원/월<br>vCPU 16개, 메모리 128GB, 디스크 50GB:<br>1,346원/시간, 969,000원/월<br>vCPU 16개, 메모리 128GB, 디스크 100GB:<br>1,350원/시간, 971,880원/월<br>vCPU 32개, 메모리 128GB, 디스크 50GB:<br>2,036원/시간, 1,465,600원/월<br>vCPU 32개, 메모리 128GB, 디스크 100GB:<br>2,040원/시간, 1,468,480원/월<br>vCPU 32개, 메모리 256GB, 디스크 50GB:<br>2,775원/시간, 1,998,000원/월<br>vCPU 32개, 메모리 256GB, 디스크 100GB:<br>2,779원/시간, 2,000,880원/월 |
+| **CPU Intensive-g1** | 머신/딥 러닝용 처리서버, 고성능 웹서버, HPC / 배치 처리, 비디오 인코딩 | vCPU 8개, 메모리 64GB, 디스크 50GB:<br>673원/시간, 484,000원/월<br>vCPU 8개, 메모리 64GB, 디스크 100GB:<br>677원/시간, 486,880원/월<br>vCPU 16개, 메모리 64GB, 디스크 50GB:<br>1,018원/시간, 732,800원/월<br>vCPU 16개, 메모리 64GB, 디스크 100GB:<br>1,022원/시간, 735,680원/월<br>vCPU 16개, 메모리 128GB, 디스크 50GB:<br>1,346원/시간, 969,000원/월<br>vCPU 16개, 메모리 128GB, 디스크 100GB:<br>1,350원/시간, 971,880원/월<br>vCPU 32개, 메모리 128GB, 디스크 50GB:<br>2,036원/시간, 1,465,600원/월<br>vCPU 32개, 메모리 128GB, 디스크 100GB:<br>2,040원/시간, 1,468,480원/월<br>vCPU 32개, 메모리 256GB, 디스크 50GB:<br>2,775원/시간, 1,998,000원/월<br>vCPU 32개, 메모리 256GB, 디스크 100GB:<br>2,779원/시간, 2,000,880원/월 |
+
+
