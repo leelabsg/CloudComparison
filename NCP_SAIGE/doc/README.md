@@ -78,6 +78,7 @@
 - Block Storage: 약 200시간 * 0.08원 * 500GB = 8,000원
 - 총 합: (고정 비용 139,000원) + (Imputed Genotype을 이용한 SAIGE 분석 1회 시 약 77,000원) * (분석 횟수 n회) =  (139,000 + 77,000*n)원
 ## 부록 (Init Script)
+```bash
 #!/bin/bash
 set -e
 exec > >(tee /var/log/startup-script.log) 2>&1
@@ -211,3 +212,4 @@ do
 done
 
 umount -l /mnt/a
+```
