@@ -59,5 +59,10 @@
 - NAS에 저장한 데이터를 NAS 볼륨과 연결한 여러 개의 서버와 공유하고 관리할 수 있다.
 - 데이터의 자유로운 편집에 대한 우려가 있으므로 본 과제에서는 적합하지 않다고 보인다.
 - GB당 0.1원/시간 (VAT 별도) 요금으로 서비스를 제공한다.
-## 네이버 클라우드 서비스 기반 구축 환경
+## 네이버 클라우드 플랫폼 기반 환경 구축
 ![NCPArchitecture](NCPArchitecture.png)
+- Host Server: Standard-g1, 2vCPU, 4GB Mem, 50GB Disk
+- VM Instance: Standard-g1, 4vCPU, 32GB Mem, 50GB Disk
+- Object Storage: 약 2500GB
+- Block Storage: 500GB
+- Init Script: 사용자가 미리 작성한 스크립트를 서버가 생성되면서 자동으로 실행한다.
