@@ -77,6 +77,10 @@
 - Object Storage API 요금(GET): 약 2,500GB * 0.0004원 = 1원
 - Block Storage: 약 200시간 * 0.08원 * 500GB = 8,000원
 - 총 합: (고정 비용 139,000원) + (Imputed Genotype을 이용한 SAIGE 분석 1회 시 약 77,000원) * (분석 횟수 n회) =  (139,000 + 77,000*n)원
+### 향후 해결 과제
+네이버 클라우드 플랫폼의 경우 Block Storage 반환 후, VM Instance 내에서 자체적으로 반환하려 하면 아래와 같은 에러가 뜨는 문제가 있다.  
+Unable to terminate the server because (another) user is operating the server or there is a problem with it. Please check the server status again.  
+이를 해결하려면 현재로써는 Host Server에서 VM Instance를 정지하고, 반환해야 한다. VM Instance 내에서 자체적으로 반환되도록 하는 것이 현재 당면한 과제이다.
 ## 부록 (Init Script)
 ```bash
 #!/bin/bash
