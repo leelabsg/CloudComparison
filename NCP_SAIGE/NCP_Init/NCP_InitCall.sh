@@ -1,4 +1,4 @@
-./ncloud server getServerProductList --serverImageProductCode SPSW0LINUX000063
+./ncloud server getServerProductList --serverImageProductCode SPSW0LINUX000130
 ./ncloud server createServerInstances --serverImageProductCode SPSW0LINUX000063 --serverProductCode SPSVRSSD00000013 --serverName mktest --initScriptNo 72828
 
 ##############################################################################################################
