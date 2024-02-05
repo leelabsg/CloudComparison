@@ -1,5 +1,5 @@
 ./ncloud server getServerProductList --serverImageProductCode SPSW0LINUX000130
-./ncloud server createServerInstances --serverImageProductCode SPSW0LINUX000063 --serverProductCode SPSVRSSD00000013 --serverName mktest --initScriptNo 72828
+./ncloud server createServerInstances --serverImageProductCode SPSW0LINUX000130 --serverProductCode SPSVRSSD00000013 --serverName mktest --initScriptNo 72828
 
 ##############################################################################################################
 # 위의 명령이 async하게 떨어집니다. init script 실행이 모두 완료되었는지를 확인하고 아래의 절차를 진행해 주세요.
