@@ -77,7 +77,7 @@
 - 1차 시도
     + Step0: 7시간
     + Step1: 0.5시간
-    + Step2: chrom22로 2.5시간 (총 expected 시간 = 185시간)
+    + Step2: chrom22로 4.45시간 (총 expected 시간 = 328.5시간)
 - 2차 시도
     + Step0: 7시간
     + Step1: 0.5시간
