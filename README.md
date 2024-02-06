@@ -32,7 +32,7 @@
 
 > classic cli 예: ncloud server getServerInstanceList --serverInstanceStatusCode NSTOP --regionNo 2
 
-
+- 현재 호스트 서버에는 cli가 깔려 있지만, 다른 호스트 서버를 구축하려면, cli를 _"https://cli.ncloud-docs.com/docs/guide-clichange"_ 에서 다운받은 뒤에 호스트 서버로 옮겨야 한다.
 
 - VPC가 classic 보다 더 많은 api와 cli 커멘드를 지원하고 있으며, init script를 cli 상에서 등록하는 것은 VPC 서비스에서만 지원된다.
 <figure>
