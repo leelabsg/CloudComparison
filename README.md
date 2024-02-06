@@ -319,7 +319,7 @@ umount -l /mnt/a
     + Step2: chrom22로 3시간 48분 (총 expected 시간 = 281.7시간)
 
 - 실행을 통하여, 나온 결과와 timestamp는 "KCP_SAIGE/output_log/step0 & step1.log", "KCP_SAIGE/output_log/step2.log" 이다.
-
+- **추후 1~22까지 실행하기 위해서는 SSD 크기를 늘려서 생성해야 한다.**
 ### kakao cloud shell
 ```bash
 
