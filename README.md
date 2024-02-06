@@ -5,6 +5,7 @@
 ### 네이버 클라우드 사용법
 
 ![NCPArchitecture](/NCP_SAIGE/doc/NCPArchitecture.png)
+[네이버 클라우드 플랫폼 환경 아키텍쳐]
 
 ```bash
 #!/bin/bash
