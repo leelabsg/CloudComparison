@@ -55,8 +55,10 @@
 - 관련 도큐먼트는 다음과 같다. 부족한 정보가 있으면 참고. _"https://guide.ncloud-docs.com/docs/server-manage-classic#포트포워딩설정"_, _"https://guide.ncloud-docs.com/docs/server-access-classic_", "_https://guide.ncloud-docs.com/docs/server-publicip-classic_"
 
 ### 현재 발견한 네이버 클라우드 문제점들
-- init script가 Ubuntu Server 18.04 (64-bit)가 아닌 "productCode": "SPSW0LINUX000063", "productName": "redis(3.2.8)-ubuntu-14.04-64-server"에서는 오류가 발생한다는 것을 알게 되었다. Ubuntu Server 18.04 (64-bit)는 4월 30일까지만 서비스 제공.
-
+- init script가 OS(ServerImageProduct)가 Ubuntu Server 18.04 (64-bit)가 아닌 "productCode": "SPSW0LINUX000063", "productName": "redis(3.2.8)-ubuntu-14.04-64-server"에서는 오류가 발생한다는 것을 알게 되었다. Ubuntu Server 18.04 (64-bit)는 4월 30일까지만 서비스 제공.
+> 오류는 처음에는 jq 명령어를 못 찾는 오류였고, 서버에 직접 접속하여 하나하나 cli를 다시 시도하니 되었다. 다만 apt install python-pip -y, pip install awscli==1.15.85 라인에서 다시 오류가 발생하는 것으로 보아, OS 별로 install 방식이 다른 데에서 기인한 것으로 보임.
+- classic 서비스 이용시 init script 생성을 cli 상에서 불가.
+- 
 ```bash
 #!/bin/bash
 set -e
@@ -67,11 +69,11 @@ curl -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -o /u
 chmod a+x /usr/local/bin/jq
 
 apt install sshpass
-sshpass -p '********' scp -o StrictHostKeyChecking=no -P 1028 -r root@27.96.129.251:/root/cli_linux /root/
+sshpass -p 'flfoq' scp -o StrictHostKeyChecking=no -P 1028 -r root@27.96.129.251:/root/cli_linux /root/
 cd /root/cli_linux
 
-export AWS_ACCESS_KEY_ID="**********"
-export AWS_SECRET_ACCESS_KEY="******************"
+export AWS_ACCESS_KEY_ID="JcWpzzSYISiipUCMlqsH"
+export AWS_SECRET_ACCESS_KEY="k6FfwQ4gRxkGQQ9xvWUQX559E4X0xY00gd2VmF2h"
 echo -e "${AWS_ACCESS_KEY_ID}\n${AWS_SECRET_ACCESS_KEY}\n\n" | ./ncloud configure
 
 serverInstanceNo=$(./ncloud server getServerInstanceList | jq -r '.getServerInstanceListResponse.serverInstanceList[] | select(.serverName == "mktest") | .serverInstanceNo')
