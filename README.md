@@ -276,7 +276,7 @@ umount -l /mnt/a
     + _"ssh -i leelab.pem ubuntu@61.109.214.162"_
 - 공공기관용 카카오 클라우드에서 접속을 해야 콘솔에 접근이 가능하다. 일반 카카오 클라우드에서는 조직 이름 검색이 안 되지만, 아래 링크로 들어가면 가능하다.
     + _"https://account.kakaoicloud-kr-gov.com/domain?redirect_uri=https%3A%2F%2Fconsole.kakaoicloud-kr-gov.com%2Fdashboard"_
-- 공공기관용인 경우 CSAP 클라우드 보안 인증을 받아야 하는데, 이 때문에 일반 클라우드 서비스(_"https://kakaocloud.com_")와 공공기관용 클라우드 서비스(_"https://kakaocloud-kr-gov.com/intro"_)가 나눠져 있다.
+- 공공기관용인 경우 CSAP 클라우드 보안 인증을 받아야 하는데, 이 때문에 일반 클라우드 서비스("https://kakaocloud.com")와 공공기관용 클라우드 서비스("https://kakaocloud-kr-gov.com/intro")가 나눠져 있다.
 - 만약, 새로운 서버 인스턴스를 만들고 싶으면 아래의 절차를 따른다.
 <figure>
     <img src="/KCP_SAIGE/img/create kakao cloud instance - 1.png" title="create kakao cloud instance - 1.png">    
