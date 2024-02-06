@@ -40,6 +40,7 @@
     <figcaption><b>[init_script 설명 이미지]</b></figcaption>
 </figure>
 
+
 - classic을 사용하고 있다면, GUI 콘솔 상에서만 init script를 등록할 수 있다. 콘솔 > Services > Compute > Server > Init Script 로 이동하면 위 이미지의 창이 뜬다. Script 생성 버튼을 이용하여 init script를 등록할 수 있다.
 - 이미 등록된 init script를 cli 상에서 사용하려면 init script의 번호를 찾아야 한다. 
 
