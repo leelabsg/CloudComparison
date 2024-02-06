@@ -58,6 +58,7 @@
 - 관련 도큐먼트는 다음과 같다. 부족한 정보가 있으면 참고. _"https://guide.ncloud-docs.com/docs/server-manage-classic#포트포워딩설정"_, _"https://guide.ncloud-docs.com/docs/server-access-classic_", "_https://guide.ncloud-docs.com/docs/server-publicip-classic_"
 
 ### 현재 발견한 네이버 클라우드 문제점들
+- GCP나 카카오 클라우드 플랫폼과 다르게, 블록 스토리지를 연결하려면 마운트 과정이 필요하다. GCP의 경우 블록 스토리지의 사이즈를 인스턴스 생성과 함께 명시한다는 점이 간단하고, 카카오 클라우드도 콘솔 상에서 스토리지를 함께 생성시킨다.
 - init script가 OS(ServerImageProduct)가 Ubuntu Server 18.04 (64-bit)가 아닌 "productCode": "SPSW0LINUX000063", "productName": "redis(3.2.8)-ubuntu-14.04-64-server"에서는 오류가 발생한다는 것을 알게 되었다. Ubuntu Server 18.04 (64-bit)는 4월 30일까지만 서비스 제공.
 > 오류는 처음에는 jq 명령어를 못 찾는 오류였고, 서버에 직접 접속하여 하나하나 cli를 다시 시도하니 되었다. 다만 apt install python-pip -y, pip install awscli==1.15.85 라인에서 다시 오류가 발생하는 것으로 보아, OS 별로 install 방식이 다른 데에서 기인한 것으로 보임.
 - classic 서비스 이용시 init script 생성을 cli 상에서 불가.
