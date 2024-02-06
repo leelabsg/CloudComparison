@@ -45,6 +45,14 @@
 - 이미 등록된 init script를 cli 상에서 사용하려면 init script의 번호를 찾아야 한다. getInitScriptList를 이용하여 init script 번호를 알 수 있다. (classic: _"https://cli.ncloud-docs.com/docs/cli-server-getinitscriptlist"_, VPC: _"https://cli.ncloud-docs.com/docs/cli-vserver-initscript-getinitscriptlist"_)
 - init script 번호를 안다면, VM 인스턴스를 생성할 때, 해당 번호를 전달하여, 자동으로 shell script가 생성과 동시에 실행되도록 할 수 있다. 만약, 서버에서 init script가 잘 돌아가는지 보고 싶으면, 생성된 인스턴스에 들어가도 init script가 중단되지 않으니, 걱정하지 않아도 된다.
 
+<figure>
+    <img src="/NCP_SAIGE/doc/server_setting.png" title="server_setting.png">    
+    <figcaption><b>[첫 서버에 접속하는 법]</b></figcaption>
+</figure>
+
+
+- 새로 생성된 서버에 들어가 보려면 콘솔 > Service > Compute > Server 로 이동하여, 생성된 서버의 체크박스를 체크 한 뒤, "서버 관리 및 설정 변경" 을 선택하여 "관리자 비밀번호 확인"을 누른다. 이를 통해, 무작위로 생성된 서버의 임시 비밀번호를 알 수 있다. 이때 CloudComparison에 있는 _"/pem_certificate/naver/aaa.pem"_ 파일이 필요하다. 관리자 비밀번호를 메모장에 저장해 둔다. 위 이미지의 네모 박스, 포트 포워딩 설정은 VM 인스턴스를 공용 ip의 port에 연결하기 위해서 해 주는 것이다. 1,024~65,534 범위의 숫자가 중복되지 않게 설정하면 된다.
+
 ```bash
 #!/bin/bash
 set -e
