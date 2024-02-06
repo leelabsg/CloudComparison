@@ -28,7 +28,10 @@
         + 좀 더 상세하고, 높은 수준의 보안 설정 가능
     * (출처: _"https://docs.3rdeyesys.com/management/ncloud_management_classic_vs_vpc_guide.html"_)
 - cli 가이드는 _"https://cli.ncloud-docs.com/docs/home"_ 를 참고. VPC와 classic에 따라 cli가 차이가 나는 점에 대해서 주의가 필요하다.
-> VPC cli 예: ncloud vserver getServerInstanceList --regionCode KR --vpcNo ***04 --serverInstanceNoList ***4299 --serverName test-*** --serverInstanceStatusCode RUN --baseBlockStorageDiskTypeCode NET --baseBlockStorageDiskDetailTypeCode SSD --ip ***.***.111.215 --placementGroupNoList ***61   classic cli 예: ncloud server getServerInstanceList --serverInstanceStatusCode NSTOP --regionNo 2
+> VPC cli 예: ncloud vserver getServerInstanceList --regionCode KR --vpcNo ***04 --serverInstanceNoList ***4299 --serverName test-*** --serverInstanceStatusCode RUN --baseBlockStorageDiskTypeCode NET --baseBlockStorageDiskDetailTypeCode SSD --ip ***.***.111.215 --placementGroupNoList ***61
+
+
+> classic cli 예: ncloud server getServerInstanceList --serverInstanceStatusCode NSTOP --regionNo 2
 - VPC가 classic 보다 더 많은 api와 cli 커멘드를 지원하고 있으며, init script를 cli 상에서 등록하는 것은 VPC 서비스에서만 지원된다.
 <figure>
     <img src="/NCP_SAIGE/doc/init_script.png" title="init_script.png">    
