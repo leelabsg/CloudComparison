@@ -57,6 +57,24 @@
 - 새로 생성된 서버에 들어가 보려면 콘솔 > Service > Compute > Server 로 이동하여, 생성된 서버의 체크박스를 체크 한 뒤, "서버 관리 및 설정 변경" 을 선택하여 "관리자 비밀번호 확인"을 누른다. 이를 통해, 무작위로 생성된 서버의 임시 비밀번호를 알 수 있다. 이때 CloudComparison에 있는 _"/pem_certificate/naver/aaa.pem"_ 파일이 필요하다. 관리자 비밀번호를 메모장에 저장해 둔다. 위 이미지의 네모 박스, 포트 포워딩 설정은 VM 인스턴스를 공용 ip의 port에 연결하기 위해서 해 주는 것이다. 1,024~65,534 범위의 숫자가 중복되지 않게 설정하면 된다.
 - 관련 도큐먼트는 다음과 같다. 부족한 정보가 있으면 참고. _"https://guide.ncloud-docs.com/docs/server-manage-classic#포트포워딩설정"_, _"https://guide.ncloud-docs.com/docs/server-access-classic_", "_https://guide.ncloud-docs.com/docs/server-publicip-classic_"
 
+- 추가적으로 유용한 naver cloud cli 명령어들은 다음과 같다.
+    + getServerImageProductList: NCP에서 제공하는 서버 이미지(OS)의 리스트를 반환
+    + getServerProductList: NCP에서 제공하는 서버 제품들의 리스트를 반환 (메모리, vCPU 수, SSD/HDD 크기에 따라 다양하게 분류된다.)
+    + getServerInstanceList: 현재 내가 만들어서 사용하고 있는 서버들을 반환.
+    + createServerInstances: 서버 인스턴스 생성
+    + terminateServerInstances: 서버 인스턴스 반납 (정지된 인스턴스만 반납 가능)
+    + stopServerInstances: 서버 인스턴스 정지
+    + getInitScriptList: 나의 init script 리스트 반환
+    + getRootPassword: 서버의 루트 계정의 비밀번호를 조회. cli를 사용 중인 서버 상에 인증pem 파일이 있어야 가능하다.
+    + getBlockStorageInstanceList: 블록 스토리지 리스트를 반환. 블록 스토리지의 number(blockStorageInstanceNo)를 찾을 때 사용. serverInstanceNo를 보고 어떤 서버에 묶여있는지 확인 가능.
+    + createBlockStorageInstance: 블록 스토리지 생성. 생성 후 마운트를 해 주어야 한다.
+    + deleteBlockStorageInstances: 블록 스토리지 삭제.
+    + attachBlockStorageInstance: 서버에 블록 스토리지를 붙인다. 해당 cli를 써 보진 않았음. init script 상에서는 서버에서 직접 마운트하는 방법을 사용.
+    + detachBlockStorageInstances: 서버에 블록 스토리지를 띈다. 해당 cli를 써 보진 않았음. init script 상에서는 서버에서 직접 언마운트하는 방법을 사용.
+    + 호환 cli: _"https://cli.ncloud-docs.com/docs/guide-objectstorage"_ 참고. aws cli를 이용하여, NCP의 object storage에서 데이터를 받아올 때 사용.
+
+
+
 ### 현재 발견한 네이버 클라우드 문제점들
 - GCP나 카카오 클라우드 플랫폼과 다르게, 블록 스토리지를 연결하려면 마운트 과정이 필요하여 불편한 면이 있다. GCP의 경우 블록 스토리지의 사이즈를 인스턴스 생성과 함께 명시한다는 점이 간단하고, 카카오 클라우드도 콘솔 상에서 스토리지를 함께 생성시킨다.
 - init script가 OS(ServerImageProduct)가 Ubuntu Server 18.04 (64-bit)가 아닌 "productCode": "SPSW0LINUX000063", "productName": "redis(3.2.8)-ubuntu-14.04-64-server"에서는 오류가 발생한다는 것을 알게 되었다. Ubuntu Server 18.04 (64-bit)는 4월 30일까지만 서비스 제공.
