@@ -321,7 +321,7 @@ umount -l /mnt/a
 - 실행을 통하여, 나온 결과와 timestamp는 "KCP_SAIGE/output_log/step0 & step1.log", "KCP_SAIGE/output_log/step2.log" 이다.
 
 ### kakao cloud shell
-```
+```bash
 #!/bin/bash
 
 timestamp=$(date)"step0start"
