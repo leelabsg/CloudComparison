@@ -92,6 +92,7 @@
 
 ### 네이버 클라우드 실험 결과
 - 서버 이미지 Ubuntu Server 18.04 (64-bit)인, [Standard] 4vCPU, 32GB Mem, 50GB Disk [g1] 스펙의 VM 인스턴스로 두 번의 실험을 하였다.
+- **_Block Storage 500GB는 HDD를 이용하였다._**
     + ./ncloud server createServerInstances --serverImageProductCode SPSW0LINUX000130 --serverProductCode SPSVRSSD00000013 --serverName mktest --initScriptNo 72828
 - 1차 시도
     + Step0: 7시간
@@ -317,7 +318,7 @@ umount -l /mnt/a
     + Step0: 5시간 24분
     + Step1: 18분 
     + Step2: chrom22로 3시간 48분 (총 expected 시간 = 281.7시간)
-
+- 네이버와의 속도 차이는 디스크 드라이브가 SDD(kakao)인지, HDD(naver)인지에 따른 것일 수 있다. 
 - 실행을 통하여, 나온 결과와 timestamp는 "KCP_SAIGE/output_log/step0 & step1.log", "KCP_SAIGE/output_log/step2.log" 이다.
 - **추후 1~22까지 실행하기 위해서는 SSD 크기를 늘려서 생성해야 한다.**
 ### kakao cloud shell
