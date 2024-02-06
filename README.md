@@ -269,3 +269,5 @@ umount -l /mnt/a
 > 이용에 참고 부탁드립니다.
 >
 > 감사합니다.
+- 카카오 클라우드에 접속하기 위해서는 pem 파일이 해당 위치에 있어야 하며, 아래의 명령으로 접속이 가능하다. pem 파일은 _"/pem_certificate/naver/aaa.pem"_
+    + _"ssh -i leelab.pem ubuntu@61.109.214.162"_
