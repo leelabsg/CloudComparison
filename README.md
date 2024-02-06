@@ -297,6 +297,7 @@ umount -l /mnt/a
 
     + 위 이미지 public ip 연결을 누르고 [새로운 Public IP를 생성하고 자동으로 할당]을 누른다.
     + 위 이미지 ssh 연결을 누르고 명령어를 복사하여 실행한다.
+- SAIGE 실행에 필요한 데이터는 카카오 클라우드 내에서 leelab 서버로부터 scp로 옮겨왔다.
 
 - Object Storage 서비스도 있지만, 콘솔 상에서는 한 파일 최대 크기가 50GB를 넘게 올리지 못 한다.
     * 네이버 클라우드와 같은 호스트-인스턴스 관계의 아키텍쳐가 아니라서, Object Storage를 사용할 필요는 없을 것으로 보인다.
@@ -308,3 +309,72 @@ umount -l /mnt/a
       > 감사합니다
     * 이와 별개로 아래와 같이 api를 curl로 날려서, token 인증을 할 수 있다. 관련 자료 (_"https://docs.kakaocloud.com/start/api-preparation"_, _"https://docs.kakaocloud.com/service/bss/object-storage/how-to-guides"_)
       > curl -i -X POST -H "Content-Type: application/json" -d '{"auth": {"identity": {"methods": ["application_credential"],"application_credential": {"id": "8c27fe7e1c0a47ef854dd10109b29438","secret": "7uH2yJctQRzXkVS2WI3mooMxbAvL6vN2UIOgRz5HNzlVWgmu3zic-8Zt0clS13U1Pzb1ywqKyCxly8vxFTEFtg"}}}}' https://iam.kakaoicloud-kr-gov.com/identity/v3/auth/tokens
+
+### 카카오 클라우드 실험 결과
+- 서버 이미지 Ubuntu 20.04인, [r1i.xlarge] 4vCPU, 32GB Mem, 200GB SSD 스펙의 VM 인스턴스로 한 번의 실험을 하였다.
+
+    + Step0: 5시간 24분
+    + Step1: 18분 
+    + Step2: chrom22로 3시간 48분 (총 expected 시간 = 281.7시간)
+
+
+### kakao cloud shell
+```
+#!/bin/bash
+
+timestamp=$(date)"step0start"
+echo ${timestamp}
+
+cd /home/ubuntu/step1
+
+timestamp=$(date)"step0start"
+echo ${timestamp}
+
+docker run -w /home/ubuntu/step1 -v /home/ubuntu/step1/:/home/ubuntu/step1/ wzhou88/saige:1.3.0 createSparseGRM.R --plinkFile=/home/ubuntu/step1/UKB_step1       --nThreads=4   --outputPrefix=/home/ubuntu/step1/sparseGRM --numRandomMarkerforSparseKin=2000 --relatednessCutoff=0.125
+
+timestamp=$(date)"step0end"
+echo ${timestamp}
+
+mkdir /home/ubuntu/step1/output
+mkdir /home/ubuntu/step2/output
+timestamp=$(date)"step1start"
+echo ${timestamp}
+docker run -w /home/ubuntu/step1 -v /home/ubuntu/step1/:/home/ubuntu/step1/ wzhou88/saige:1.3.0 step1_fitNULLGLMM.R \
+--useSparseGRMtoFitNULL=TRUE \
+--sparseGRMFile=/home/ubuntu/step1/sparseGRM_relatednessCutoff_0.125_2000_randomMarkersUsed.sparseGRM.mtx \
+--sparseGRMSampleIDFile=/home/ubuntu/step1/sparseGRM_relatednessCutoff_0.125_2000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt \
+--plinkFile=/home/ubuntu/step1/UKB_step1 \
+--phenoFile=/home/ubuntu/step1/HDL_imputed_pheno.txt \
+--phenoCol=HDL \
+--covarColList=Sex,Age,PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10  \
+--sampleIDColinphenoFile=eid  \
+--traitType=quantitative \
+--invNormalize=TRUE \
+--outputPrefix=./output/HDL_imputed_Step1 \
+--nThreads=4 \
+--LOCO=TRUE \
+--FemaleCode=2 \
+--MaleCode=1 \
+--IsOverwriteVarianceRatioFile=TRUE
+
+timestamp=$(date)"step1end"
+echo ${timestamp}
+
+cd /home/ubuntu
+
+timestamp=$(date)"step2start"
+echo ${timestamp}
+docker run -w /home/ubuntu/ -v /home/ubuntu/:/home/ubuntu/ wzhou88/saige:1.3.0 step2_SPAtests.R   \
+--bgenFile=/home/ubuntu/step2/ukb_imp_chr22_v3.bgen \
+--bgenFileIndex=/home/ubuntu/step2/ukb_imp_chr22_v3.bgen.bgi        \
+--minMAF=0.0001 \
+--minMAC=10     \
+--chrom=22  \
+--GMMATmodelFile=/home/ubuntu/step1/output/HDL_imputed_Step1.rda        \
+--sampleFile=/home/ubuntu/step2/ukb45227_imp_chr1_v3_s487296.sample     \
+--varianceRatioFile=/home/ubuntu/step1/output/HDL_imputed_Step1.varianceRatio.txt       \
+--SAIGEOutputFile=/home/ubuntu/step2/output/chr22_HDL_imputed_output        \
+--LOCO=FALSE
+timestamp=$(date)"step2end"
+echo ${timestamp}
+```
