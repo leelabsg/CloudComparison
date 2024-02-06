@@ -72,11 +72,11 @@
 - Step2: 328.5시간
 ### Imputed Genotype을 이용한 SAIGE 소요 비용 
 - Host Server: 69,000원/월 (고정 비용)
-- VM Instance: 345원 * 약 200시간(Step 0, 1, 2의 시간 합 + 데이터 통신 시간) = 69,000원
+- VM Instance: 345원 * 약 336시간(Step 0, 1, 2의 시간 합) = 115,920원
 - Object Storage 저장 요금: 28원 * 약 2,500GB = 70,000원 (고정 비용)
 - Object Storage API 요금(GET): 약 2,500GB * 0.0004원 = 1원
-- Block Storage: 약 200시간 * 0.08원 * 500GB = 8,000원
-- 총 합: (고정 비용 139,000원) + (Imputed Genotype을 이용한 SAIGE 분석 1회 시 약 77,000원) * (분석 횟수 n회) =  (139,000 + 77,000*n)원
+- Block Storage: 약 336시간 * 0.08원 * 500GB = 13,440원
+- 총 합: (고정 비용 139,000원) + (Imputed Genotype을 이용한 SAIGE 분석 1회 시 약 129,360원) * (분석 횟수 n회) =  (139,000 + 129,360*n)원
 ### 향후 해결 과제
 네이버 클라우드 플랫폼의 경우 Block Storage 반환 후, VM Instance 내에서 자체적으로 반환하려 하면 아래와 같은 에러가 뜨는 문제가 있다.  
 Unable to terminate the server because (another) user is operating the server or there is a problem with it. Please check the server status again.  
