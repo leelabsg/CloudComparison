@@ -5,9 +5,13 @@
 ### 네이버 클라우드 사용법
 
 <figure>
-    <img src="/NCP_SAIGE/doc/NCPArchitecture.png" title="하얀 강아지">    
-    <figcaption>하얀 강아지</figcaption>
+    <img src="/NCP_SAIGE/doc/NCPArchitecture.png" title="네이버 클라우드 환경 아키텍쳐">    
+    <figcaption><b>[네이버 클라우드 환경 아키텍쳐]</b></figcaption>
 </figure>
+
+- 네이버 클라우드 환경의 아키텍쳐는 위 그림과 같다.
+- 호스트 서버: _"ssh -p 1028 root@27.96.129.251"_를 이용하여 접속 가능. 비밀번호는 _"flfoq"_(리랩). 스펙은 [Standard] 2vCPU, 4GB Mem, 50GB Disk [g1]이며, VM 인스턴스 생성을 위해 쓰인다.
+- 오브젝트 스토리지: 많은 양의 데이터를 저장하기 
 
 ```bash
 #!/bin/bash
