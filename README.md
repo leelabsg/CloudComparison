@@ -102,8 +102,8 @@
     + Step1: 0.5시간
     + Step2: chrom22로 4.5시간 (총 expected 시간 = 333.6시간)
 
-## _"NCP_SAIGE/doc/README.md"_ 에는 NCP의 가격 정책과 가격 계산이 있다.
-
+#### 가격 정책과 가격 계산은 _"NCP_SAIGE/doc/README.md"_ 참고
+### init script
 ```bash
 #!/bin/bash
 set -e
