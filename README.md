@@ -10,8 +10,8 @@
 </figure>
 
 - 네이버 클라우드 환경의 아키텍쳐는 위 그림과 같다.
-- 호스트 서버: _"ssh -p 1028 root@27.96.129.251"_를 이용하여 접속 가능. 비밀번호는 _"flfoq"_(리랩). 스펙은 [Standard] 2vCPU, 4GB Mem, 50GB Disk [g1]이며, VM 인스턴스 생성을 위해 쓰인다.
-- 오브젝트 스토리지: 많은 양의 데이터를 저장하기 
+- 호스트 서버: _"ssh -p 1028 root@27.96.129.251"_ 를 이용하여 접속 가능. 비밀번호는 _"flfoq"_(리랩). 스펙은 [Standard] 2vCPU, 4GB Mem, 50GB Disk [g1]이며, VM 인스턴스 생성을 위해 쓰인다.
+- 오브젝트 스토리지: SAIGE를 돌릴 때 사용되는 많은 양의 데이터를 저장하기 위한 저장공간. aws cli를 호환한다. _"https://cli-gov.ncloud-docs.com/docs/guide-objectstorage"_ 참고
 
 ```bash
 #!/bin/bash
