@@ -69,7 +69,7 @@
 ### Imputed Genotype을 이용한 SAIGE 소요 시간
 - Step0: 7시간
 - Step1: 0.5시간
-- Step2: 185시간
+- Step2: 328.5시간
 ### Imputed Genotype을 이용한 SAIGE 소요 비용 
 - Host Server: 69,000원/월 (고정 비용)
 - VM Instance: 345원 * 약 200시간(Step 0, 1, 2의 시간 합 + 데이터 통신 시간) = 69,000원
