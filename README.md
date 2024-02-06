@@ -102,6 +102,9 @@
     + Step1: 0.5시간
     + Step2: chrom22로 4.5시간 (총 expected 시간 = 333.6시간)
 
+-실행을 통하여, 나온 결과와 timestamp는 _"NCP_SAIGE/output_log/24Feb06_output.log"_, _"NCP_SAIGE/output_log/4Jan10_output.log"_ 이다.
+
+
 #### 가격 정책과 가격 계산은 _"NCP_SAIGE/doc/README.md"_ 참고
 ### init script
 ```bash
@@ -269,5 +272,25 @@ umount -l /mnt/a
 > 이용에 참고 부탁드립니다.
 >
 > 감사합니다.
-- 카카오 클라우드에 접속하기 위해서는 pem 파일이 해당 위치에 있어야 하며, 아래의 명령으로 접속이 가능하다. pem 파일은 _"/pem_certificate/naver/aaa.pem"_
+- 카카오 클라우드에 접속하기 위해서는 pem 파일이 해당 위치에 있어야 하며, 아래의 명령으로 접속이 가능하다. pem 파일은 _"/pem_certificate/kakao/leelab.pem"_ 에 있다.
     + _"ssh -i leelab.pem ubuntu@61.109.214.162"_
+- 공공기관용 카카오 클라우드에서 접속을 해야 콘솔에 접근이 가능하다. 일반 카카오 클라우드에서는 조직 이름 검색이 안 되지만, 아래 링크로 들어가면 가능하다.
+    + _"https://account.kakaoicloud-kr-gov.com/domain?redirect_uri=https%3A%2F%2Fconsole.kakaoicloud-kr-gov.com%2Fdashboard"_
+- 공공기관용인 경우 CSAP 클라우드 보안 인증을 받아야 하는데, 이 때문에 일반 클라우드 서비스(_"https://kakaocloud.com_")와 공공기관용 클라우드 서비스(_"https://kakaocloud-kr-gov.com/intro"_)가 나눠져 있다.
+- 만약, 새로운 서버 인스턴스를 만들고 싶으면 아래의 절차를 따른다.
+<figure>
+    <img src="/KCP_SAIGE/img/create kakao cloud instance - 1.png" title="create kakao cloud instance - 1.png">    
+    <figcaption><b>[카카오 클라우드 서버 만들기 1]</b></figcaption>
+</figure>
+    + 콘솔 -> virtual machine -> instance 만들기 클릭
+<figure>
+    <img src="/KCP_SAIGE/img/create kakao cloud instance - 2.png" title="create kakao cloud instance - 2.png">    
+    <figcaption><b>[카카오 클라우드 서버 만들기 2]</b></figcaption>
+</figure>
+    + 기본정보, 이미지, 인스턴스 타입, 볼륨은 자유롭게 선택해도 된다. key pair는 leelab, vpc는 leelab, subnet은 main, security group은 leelab1을 선택해 준다. 
+<figure>
+    <img src="/KCP_SAIGE/img/create kakao cloud instance - 3.png" title="create kakao cloud instance - 3.png">    
+    <figcaption><b>[카카오 클라우드 서버 만들기 3]</b></figcaption>
+</figure>
+    + 위 이미지 public ip 연결을 누르고 [새로운 Public IP를 생성하고 자동으로 할당]을 누른다.
+    + 위 이미지 ssh 연결을 누르고 명령어를 복사하여 실행한다.
