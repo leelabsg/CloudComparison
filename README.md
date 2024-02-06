@@ -54,6 +54,9 @@
 - 새로 생성된 서버에 들어가 보려면 콘솔 > Service > Compute > Server 로 이동하여, 생성된 서버의 체크박스를 체크 한 뒤, "서버 관리 및 설정 변경" 을 선택하여 "관리자 비밀번호 확인"을 누른다. 이를 통해, 무작위로 생성된 서버의 임시 비밀번호를 알 수 있다. 이때 CloudComparison에 있는 _"/pem_certificate/naver/aaa.pem"_ 파일이 필요하다. 관리자 비밀번호를 메모장에 저장해 둔다. 위 이미지의 네모 박스, 포트 포워딩 설정은 VM 인스턴스를 공용 ip의 port에 연결하기 위해서 해 주는 것이다. 1,024~65,534 범위의 숫자가 중복되지 않게 설정하면 된다.
 - 관련 도큐먼트는 다음과 같다. 부족한 정보가 있으면 참고. _"https://guide.ncloud-docs.com/docs/server-manage-classic#포트포워딩설정"_, _"https://guide.ncloud-docs.com/docs/server-access-classic_", "_https://guide.ncloud-docs.com/docs/server-publicip-classic_"
 
+### 현재 발견한 네이버 클라우드 문제점들
+- init script가 Ubuntu Server 18.04 (64-bit)가 아닌 "productCode": "SPSW0LINUX000063", "productName": "redis(3.2.8)-ubuntu-14.04-64-server"에서는 오류가 발생한다는 것을 알게 되었다. Ubuntu Server 18.04 (64-bit)는 4월 30일까지만 서비스 제공.
+
 ```bash
 #!/bin/bash
 set -e
