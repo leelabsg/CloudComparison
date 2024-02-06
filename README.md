@@ -4,8 +4,10 @@
 
 ### 네이버 클라우드 사용법
 
-![NCPArchitecture](/NCP_SAIGE/doc/NCPArchitecture.png)
-[네이버 클라우드 플랫폼 환경 아키텍쳐]
+<figure>
+    <img src="/NCP_SAIGE/doc/NCPArchitecture.png" title="하얀 강아지">    
+    <figcaption>하얀 강아지</figcaption>
+</figure>
 
 ```bash
 #!/bin/bash
