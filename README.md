@@ -16,6 +16,7 @@
 - 블록 스토리지: VM 인스턴스에 직접적으로 부착이 가능한 스토리지. 인스턴스 시작 시 생성하고, 인스턴스 위에 마운트하며, 인스턴스 반환 전에 언마운트하고, 스토리지를 반환한다. 마운트, 언마운트 관련 방법에 대한 자료는 _"https://guide-gov.ncloud-docs.com/docs/compute-compute-4-1-v2"_ 참고. init script에 cli로 언마운트 되게 하였다. cli를 이용하여 스토리지 반환하는 방법은 _"/NCP_SAIGE/NCP_Init/NCP_InitCall.sh"_ 에 있다.
 
 ### Some useful information about Naver Cloud Platform
+
 - 네이버 클라우드 플랫폼의 서비스는 크게 VPC와 classic으로 나누어져 있다.
     * classic 장점 요약
         + 서로 다른 계정의 서버들 간에 사설 통신 가능
@@ -28,11 +29,13 @@
         + 좀 더 상세하고, 높은 수준의 보안 설정 가능
     * (출처: _"https://docs.3rdeyesys.com/management/ncloud_management_classic_vs_vpc_guide.html"_)
 - cli 가이드는 _"https://cli.ncloud-docs.com/docs/home"_ 를 참고. VPC와 classic에 따라 cli가 차이가 나는 점에 대해서 주의가 필요하다.
-> VPC cli 예: ncloud vserver getServerInstanceList --regionCode KR --vpcNo ***04 --serverInstanceNoList ***4299 --serverName test-*** --serverInstanceStatusCode RUN --baseBlockStorageDiskTypeCode NET --baseBlockStorageDiskDetailTypeCode SSD --ip ***.***.111.215 --placementGroupNoList ***61
+> VPC cli 예: ./ncloud vserver getServerInstanceList --regionCode KR --vpcNo ***04 --serverInstanceNoList ***4299 --serverName test-*** --serverInstanceStatusCode RUN --baseBlockStorageDiskTypeCode NET --baseBlockStorageDiskDetailTypeCode SSD --ip ***.***.111.215 --placementGroupNoList ***61
 
-> classic cli 예: ncloud server getServerInstanceList --serverInstanceStatusCode NSTOP --regionNo 2
+> classic cli 예: ./ncloud server getServerInstanceList --serverInstanceStatusCode NSTOP --regionNo 2
 
 - 현재 호스트 서버에는 cli가 깔려 있지만, 다른 호스트 서버를 구축하려면, cli를 _"https://cli.ncloud-docs.com/docs/guide-clichange"_ 에서 다운받은 뒤에 호스트 서버로 옮겨야 한다.
+- 
+- cli를 이용할 때에는 cli가 위치한 디렉토리에 이동하여 "./ncloud {명령 내용}" (ex: ./ncloud server getServerInstanceList --serverInstanceStatusCode NSTOP --regionNo 2) 과 같은 방식으로 cli를 사용한다.
 
 - VPC가 classic 보다 더 많은 api와 cli 커멘드를 지원하고 있으며, init script를 cli 상에서 등록하는 것은 VPC 서비스에서만 지원된다.
 <figure>
@@ -67,6 +70,22 @@
 > 불편하시겠지만, CLI 를 이용하신다면 별도의 API 서버를 활용하시는 것이 좋겠습니다.
 >  
 > 감사합니다.
+
+### 네이버 클라우드 실험 결과
+- 서버 이미지 Ubuntu Server 18.04 (64-bit)인, [Standard] 4vCPU, 32GB Mem, 50GB Disk [g1] 스펙의 VM 인스턴스로 두 번의 실험을 하였다.
+    + ./ncloud server createServerInstances --serverImageProductCode SPSW0LINUX000130 --serverProductCode SPSVRSSD00000013 --serverName mktest --initScriptNo 72828
+- 1차 시도
+    + Step0: 7시간
+    + Step1: 0.5시간
+    + Step2: chrom22로 2.5시간 (총 expected 시간 = 185시간)
+- 2차 시도
+    + Step0: 7시간
+    + Step1: 0.5시간
+    + Step2: chrom22로 4.5시간 (총 expected 시간 = 333.6시간)
+
+
+
+
 ```bash
 #!/bin/bash
 set -e
