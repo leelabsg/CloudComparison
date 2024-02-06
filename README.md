@@ -18,16 +18,15 @@
 ### 네이버 클라우드 서비스 요약
 - 네이버 클라우드 플랫폼의 서비스는 크게 VPC와 classic으로 나누어져 있다.
     * classic 장점 요약
-        * 서로 다른 계정의 서버들 간에 사설 통신 가능
-        * 리전간 서버들의 사설 통신 가능 (한국, 미국, 싱가포르, 홍콩, 일본, 독일)
-        * 다양한 설치형 서버 이미지 이용 가능
+        + 서로 다른 계정의 서버들 간에 사설 통신 가능
+        + 리전간 서버들의 사설 통신 가능 (한국, 미국, 싱가포르, 홍콩, 일본, 독일)
+        + 다양한 설치형 서버 이미지 이용 가능
     * VPC 장점 요약
-        * 논리적으로 분리된 Network
-        * 사용자가 직접 Network 설계 가능
-        * 기존 고객의 데이터센터 네트워크와 유사하게 구현 가능
-        * 좀 더 상세하고, 높은 수준의 보안 설정 가능
-      
-    *(출처: _"https://docs.3rdeyesys.com/management/ncloud_management_classic_vs_vpc_guide.html"_)
+        + 논리적으로 분리된 Network
+        + 사용자가 직접 Network 설계 가능
+        + 기존 고객의 데이터센터 네트워크와 유사하게 구현 가능
+        + 좀 더 상세하고, 높은 수준의 보안 설정 가능
+    * (출처: _"https://docs.3rdeyesys.com/management/ncloud_management_classic_vs_vpc_guide.html"_)
 
 ```bash
 #!/bin/bash
