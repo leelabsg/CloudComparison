@@ -12,7 +12,8 @@
 - 네이버 클라우드 환경의 아키텍쳐는 위 그림과 같다.   
 - 호스트 서버: _"ssh -p 1028 root@27.96.129.251"_ 를 이용하여 접속 가능. 비밀번호는 _"flfoq"_(리랩). 스펙은 [Standard] 2vCPU, 4GB Mem, 50GB Disk [g1]이며, VM 인스턴스 생성을 위해 쓰인다.   
 - 오브젝트 스토리지: SAIGE를 돌릴 때 사용되는 많은 양의 데이터를 저장하기 위한 저장공간. aws cli를 호환한다. _"https://cli-gov.ncloud-docs.com/docs/guide-objectstorage"_ 참고   
-- VM 인스턴스: 실제 SAIGE를 돌리기 위해 생성되는 VM 인스턴스. 깃허브 CloudComparison의 _"/NCP_SAIGE/NCP_Init/NCP_InitCall.sh"_ 는 서버 이미지 Ubuntu Server 18.04 (64-bit)인, [Standard] 4vCPU, 32GB Mem, 50GB Disk [g1] 스펙의 VM 인스턴스를 생성한다. 다만, Ubuntu Server 18.04 (64-bit)는 최근에 4월 30일까지만 서비스 이용이 가능하다고 공지가 내려졌다.   
+- VM 인스턴스: 실제 SAIGE를 돌리기 위해 생성되는 VM 인스턴스. 깃허브 CloudComparison의 _"/NCP_SAIGE/NCP_Init/NCP_InitCall.sh"_ 는 서버 이미지 Ubuntu Server 18.04 (64-bit)인, [Standard] 4vCPU, 32GB Mem, 50GB Disk [g1] 스펙의 VM 인스턴스를 생성한다. 다만, Ubuntu Server 18.04 (64-bit)는 최근에 4월 30일까지만 서비스 이용이 가능하다고 공지가 내려졌다.
+- 블록 스토리지: VM 인스턴스에 직접적으로 부착이 가능한 스토리지. 인스턴스 시작 시 생성하고, 인스턴스 위에 마운트하며, 인스턴스 반환 전에 언마운트하고, 스토리지를 반환한다. 마운트, 언마운트 관련 방법에 대한 자료는 _"https://guide-gov.ncloud-docs.com/docs/compute-compute-4-1-v2"_ 참고. init script에 cli로 언마운트 되게 하였다. cli를 이용하여 스토리지 반환하는 방법은 _"/NCP_SAIGE/NCP_Init/NCP_InitCall.sh"_ 에 있다.
 
 ```bash
 #!/bin/bash
