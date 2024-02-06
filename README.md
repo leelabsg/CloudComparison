@@ -322,7 +322,9 @@ umount -l /mnt/a
 
 ### kakao cloud shell
 ```bash
+
 #!/bin/bash
+
 
 timestamp=$(date)"step0start"
 echo ${timestamp}
