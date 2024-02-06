@@ -282,15 +282,18 @@ umount -l /mnt/a
     <img src="/KCP_SAIGE/img/create kakao cloud instance - 1.png" title="create kakao cloud instance - 1.png">    
     <figcaption><b>[카카오 클라우드 서버 만들기 1]</b></figcaption>
 </figure>
+
 - 콘솔 -> virtual machine -> instance 만들기 클릭
 <figure>
     <img src="/KCP_SAIGE/img/create kakao cloud instance - 2.png" title="create kakao cloud instance - 2.png">    
     <figcaption><b>[카카오 클라우드 서버 만들기 2]</b></figcaption>
 </figure>
+
 - 기본정보, 이미지, 인스턴스 타입, 볼륨은 자유롭게 선택해도 된다. key pair는 leelab, vpc는 leelab, subnet은 main, security group은 leelab1을 선택해 준다. 
 <figure>
     <img src="/KCP_SAIGE/img/create kakao cloud instance - 3.png" title="create kakao cloud instance - 3.png">    
     <figcaption><b>[카카오 클라우드 서버 만들기 3]</b></figcaption>
 </figure>
+
 - 위 이미지 public ip 연결을 누르고 [새로운 Public IP를 생성하고 자동으로 할당]을 누른다.
 - 위 이미지 ssh 연결을 누르고 명령어를 복사하여 실행한다.
