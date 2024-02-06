@@ -105,7 +105,7 @@
 -실행을 통하여, 나온 결과와 timestamp는 _"NCP_SAIGE/output_log/24Feb06_output.log"_, _"NCP_SAIGE/output_log/4Jan10_output.log"_ 이다.
 
 
-#### 가격 정책과 가격 계산은 _"NCP_SAIGE/doc/README.md"_ 참고
+#### 네이버 클라우드 플랫폼 가격 정책과 가격 계산은 _"NCP_SAIGE/doc/README.md"_ 참고
 ### init script
 ```bash
 #!/bin/bash
@@ -247,6 +247,7 @@ umount -l /mnt/a
 ## 카카오 클라우드
 
 ### Information about Kakao Cloud Platform
+- 카카오 클라우드는 _"kc_helpdesk@kakaoenterprise.com"_ 이메일 주소를 통해 기술적 문의를 내부 기술자와 할 수 있으며, 답변 시간도 빠르다.
 - 카카오 클라우드는 api, cli를 이용하여 인스턴스를 생성하고 삭제할 수 없다.
 > 안녕하세요, 카카오클라우드입니다.
 >
