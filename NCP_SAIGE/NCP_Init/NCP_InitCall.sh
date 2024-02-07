@@ -8,7 +8,9 @@
 # chmod a+x /usr/local/bin/jq
 ##############################################################################################################
 serverInstanceNo=$(./ncloud server getServerInstanceList | jq -r '.getServerInstanceListResponse.serverInstanceList[] | select(.serverName == "mktest") | .serverInstanceNo')
-./ncloud server stopServerInstances --serverInstanceNoList ${serverInstanceNo}
+
 blockInstanceNo=$(./ncloud server getBlockStorageInstanceList | jq -r '.getBlockStorageInstanceListResponse.blockStorageInstanceList[] | select(.serverName == "mktest" and .deviceName == "/dev/xvdb") | .blockStorageInstanceNo')
 ./ncloud server deleteBlockStorageInstances --blockStorageInstanceNoList ${blockInstanceNo}
+
+./ncloud server stopServerInstances --serverInstanceNoList ${serverInstanceNo}
 ./ncloud server terminateServerInstances --serverInstanceNoList ${serverInstanceNo} 
