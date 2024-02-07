@@ -304,13 +304,15 @@ umount -l /mnt/a
 - Object Storage 서비스도 있지만, 콘솔 상에서는 한 파일 최대 크기가 50GB를 넘게 올리지 못 한다.
     * 네이버 클라우드와 같은 호스트-인스턴스 관계의 아키텍쳐가 아니라서, Object Storage를 사용할 필요는 없을 것으로 보인다.
     * swift api를 지원하여, 이를 통해 데이터를 put, get한다. ( _"https://docs.openstack.org/api-ref/object-store/index.html"_ )
-    * 이를 시도해 보았으나, 잘 되지 않았으며, 관련 문의를 드렸으나, 카카오 측은 아래와 같은 답변을 보냈다.
-      > 추가적으로 SWIFT API 사용 예제에 대한 공식적인 가이드는 제공되고 있지 않습니다.
-      > 시간 내어 문의해 주셨으나 원하는 답변을 드리지 못하는 점 양해 부탁드리며,
-      > 더 나은 서비스 제공을 위해 최선을 다하겠습니다.
-      > 감사합니다
+    ~~* 이를 시도해 보았으나, 잘 되지 않았으며, 관련 문의를 드렸으나, 카카오 측은 아래와 같은 답변을 보냈다.~~
+      ~~> 추가적으로 SWIFT API 사용 예제에 대한 공식적인 가이드는 제공되고 있지 않습니다.~~
+      ~~> 시간 내어 문의해 주셨으나 원하는 답변을 드리지 못하는 점 양해 부탁드리며,~~
+      ~~> 더 나은 서비스 제공을 위해 최선을 다하겠습니다.~~
+      ~~> 감사합니다~~
     * 이와 별개로 아래와 같이 api를 curl로 날려서, token 인증을 할 수 있다. 관련 자료 (_"https://docs.kakaocloud.com/start/api-preparation"_, _"https://docs.kakaocloud.com/service/bss/object-storage/how-to-guides"_)
       > curl -i -X POST -H "Content-Type: application/json" -d '{"auth": {"identity": {"methods": ["application_credential"],"application_credential": {"id": "8c27fe7e1c0a47ef854dd10109b29438","secret": "7uH2yJctQRzXkVS2WI3mooMxbAvL6vN2UIOgRz5HNzlVWgmu3zic-8Zt0clS13U1Pzb1ywqKyCxly8vxFTEFtg"}}}}' https://iam.kakaoicloud-kr-gov.com/identity/v3/auth/tokens
+- 업로드 코드 예제:
+     > curl -i https://objectstorage.kr-gov-central-1.kakaoicloud-kr-gov.com/v1/118a1f5ae43b44e7937d560eefe1486a/leelabsgtest/step1/hello.txt -X PUT -T hello.txt -H "Content-Type: text/html; charset=UTF-8" -H "X-Auth-Token: $token"
 
 ### 카카오 클라우드 실험 결과
 - 서버 이미지 Ubuntu 20.04인, [r1i.xlarge] 4vCPU, 32GB Mem, 200GB SSD 스펙의 VM 인스턴스로 한 번의 실험을 하였다.
