@@ -103,6 +103,12 @@
     + Step1: 0.5시간
     + Step2: chrom22로 4.5시간 (총 expected 시간 = 333.6시간)
 
+  ### 2월 8일 추가내용
+  - **_서버 이미지 Ubuntu Server 18.04 (64-bit)인, [Standard] 4vCPU, 32GB Mem, 50GB Disk [g1] 스펙의 VM 인스턴스에 Block Storage 500GB를 SDD를 이용한 결과_**
+  - Step0: 7시간
+  - Step1: 0.5시간
+  - Step2: chrom22로 4.38시간 (총 expected 시간 = 324.98시간)
+
 -실행을 통하여, 나온 결과와 timestamp는 _"NCP_SAIGE/output_log/24Feb06_output.log"_, _"NCP_SAIGE/output_log/4Jan10_output.log"_ 이다.
 
 
