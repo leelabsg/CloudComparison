@@ -12,7 +12,22 @@
 - 네이버 클라우드 환경의 아키텍쳐는 위 그림과 같다.   
 - 호스트 서버: _"ssh -p 1028 root@27.96.129.251"_ 를 이용하여 접속 가능. 비밀번호는 _"flfoq"_(리랩). 스펙은 [Standard] 2vCPU, 4GB Mem, 50GB Disk [g1]이며, VM 인스턴스 생성을 위해 쓰인다.   
 - 오브젝트 스토리지: SAIGE를 돌릴 때 사용되는 많은 양의 데이터를 저장하기 위한 저장공간. aws cli를 호환한다. _"https://cli-gov.ncloud-docs.com/docs/guide-objectstorage"_ 참고   
-- VM 인스턴스: 실제 SAIGE를 돌리기 위해 생성되는 VM 인스턴스. 깃허브 CloudComparison의 _"/NCP_SAIGE/NCP_Init/NCP_InitCall.sh"_ 는 서버 이미지 Ubuntu Server 18.04 (64-bit)인, [Standard] 4vCPU, 32GB Mem, 50GB Disk [g1] 스펙의 VM 인스턴스를 생성한다. 다만, Ubuntu Server 18.04 (64-bit)는 최근에 4월 30일까지만 서비스 이용이 가능하다고 공지가 내려졌다.
+- VM 인스턴스: 실제 SAIGE를 돌리기 위해 생성되는 VM 인스턴스. 깃허브 CloudComparison의 _"/NCP_SAIGE/NCP_Init/NCP_InitCall.sh"_ 는 서버 이미지 Ubuntu Server 18.04 (64-bit)인, [Standard] 4vCPU, 32GB Mem, 50GB Disk [g1] 스펙의 VM 인스턴스를 생성한다.
+- 다만, Ubuntu Server 18.04 (64-bit)는 제조사 측에서 업데이트 서비스를 제공하지 않기로 하면서 네이버 측도 서비스 종료를 고려하고 있다고 한다.
+  > 안녕하세요.
+  > 네이버 클라우드 플랫폼입니다.
+  >
+  > Classic 환경 ubuntu-18.04 의 경우 제조사에서 이미 EOS 된 서버 이미지이나, 네이버 클라우드 플랫폼에서 판매종료(Fade-out)된 OS는 아니므로 현재 생성이 가능한 상태입니다.
+  >
+  > 판매종료(Fade-out)된 OS는 서버 생성 콘솔에서 노출되지 않으나 기존 생성된 서버 이미지는 사용이 계속 가능합니다.
+  >
+  > ubuntu-18.04 는 현재 생성 가능합니다만 저희쪽에서 서비스 종료가 결정되면 생성이 불가해질 수 있습니다.
+  >
+  > 자세한 사항은 아래 FAQ를 참고 바랍니다.
+  > https://www.ncloud.com/support/faq/prod/2870
+  >
+  >감사합니다.
+
 - 블록 스토리지: VM 인스턴스에 직접적으로 부착이 가능한 스토리지. 인스턴스 시작 시 생성하고, 인스턴스 위에 마운트하며, 인스턴스 반환 전에 언마운트하고, 스토리지를 반환한다. 마운트, 언마운트 관련 방법에 대한 자료는 _"https://guide-gov.ncloud-docs.com/docs/compute-compute-4-1-v2"_ 참고. init script에 cli로 언마운트 되게 하였다. cli를 이용하여 스토리지 반환하는 방법은 _"/NCP_SAIGE/NCP_Init/NCP_InitCall.sh"_ 에 있다.
 
 ### Some useful information about Naver Cloud Platform
@@ -77,7 +92,7 @@
 
 ### 현재 발견한 네이버 클라우드 문제점들
 - GCP나 카카오 클라우드 플랫폼과 다르게, 블록 스토리지를 연결하려면 마운트 과정이 필요하여 불편한 면이 있다. GCP의 경우 블록 스토리지의 사이즈를 인스턴스 생성과 함께 명시한다는 점이 간단하고, 카카오 클라우드도 콘솔 상에서 스토리지를 함께 생성시킨다.
-- init script가 OS(ServerImageProduct)가 Ubuntu Server 18.04 (64-bit)가 아닌 "productCode": "SPSW0LINUX000063", "productName": "redis(3.2.8)-ubuntu-14.04-64-server"에서는 오류가 발생한다는 것을 알게 되었다. Ubuntu Server 18.04 (64-bit)는 4월 30일까지만 서비스 제공.
+- init script가 OS(ServerImageProduct)가 Ubuntu Server 18.04 (64-bit)가 아닌 "productCode": "SPSW0LINUX000063", "productName": "redis(3.2.8)-ubuntu-14.04-64-server"에서는 오류가 발생한다는 것을 알게 되었다.
 > 오류는 처음에는 jq 명령어를 못 찾는 오류였고, 서버에 직접 접속하여 하나하나 cli를 다시 시도하니 되었다. 다만 apt install python-pip -y, pip install awscli==1.15.85 라인에서 다시 오류가 발생하는 것으로 보아, OS 별로 install 방식이 다른 데에서 기인한 것으로 보임.
 - classic 서비스 이용시 init script 생성을 cli 상에서 불가.
 - SAIGE가 끝나고, 자동 반환이 불가능하다. 이는 서버 반환을 하려면 서버 종료를 해야 하는데, 종료된 서버는 자체 반환이 안 되는 데에서 기인한다. 네이버 클라우드 서비스 질문 남기기에 해당 문제에 대해 물어봤지만, 해결은 불가능해 보인다. 아래는 네이버 측 답변.
