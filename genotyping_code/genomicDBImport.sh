@@ -5,10 +5,10 @@ function check_running_containers() {
     while : ; do
         local running=$(docker ps -q | wc -l) # 실행 중인 컨테이너의 수
         if [ "$running" -lt 10 ]; then
-            break # 실행 중인 컨테이너의 수가 100 미만이면 반복 중단
+            break # 실행 중인 컨테이너의 수가 10 미만이면 반복 중단
         fi
-        echo "현재 실행 중인 컨테이너가 100개 이상입니다. 잠시 기다리세요..."
-        sleep 5m # 5분 대기
+        echo "현재 실행 중인 컨테이너가 10개 이상입니다. 잠시 기다리세요..."
+        sleep 5m 
     done
 }
 # ls /data/wgs_gvcf/test_noACs/chr${chr}/*.gz > /data/wgs_gvcf/noAC_input.list
